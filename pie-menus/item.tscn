@@ -1,0 +1,183 @@
+[gd_scene load_steps=11 format=3 uid="uid://bipgbc2yu3ps4"]
+
+[ext_resource type="Script" path="res://item.gd" id="1_sjry0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_s6b2v"]
+
+[sub_resource type="Theme" id="Theme_wofnv"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.117647)
+Label/constants/line_spacing = 3
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 2
+Label/font_sizes/font_size = 28
+
+[sub_resource type="Animation" id="Animation_a122v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d0vc6"]
+resource_name = "hover"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.117647)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kyycl"]
+resource_name = "pressed"
+length = 0.05
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(0.6, 0.6)]
+}
+
+[sub_resource type="Animation" id="Animation_s3u34"]
+resource_name = "released"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_opq4g"]
+resource_name = "unhover"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.117647), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0vbm6"]
+_data = {
+"RESET": SubResource("Animation_a122v"),
+"hover": SubResource("Animation_d0vc6"),
+"pressed": SubResource("Animation_kyycl"),
+"released": SubResource("Animation_s3u34"),
+"unhover": SubResource("Animation_opq4g")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oalk2"]
+radius = 105.067
+
+[node name="Item" type="Node2D"]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_sjry0")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 11)
+scale = Vector2(198.225, 198.225)
+mesh = SubResource("SphereMesh_s6b2v")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -98.0
+offset_top = 95.0
+offset_right = 98.0
+offset_bottom = 176.0
+theme = SubResource("Theme_wofnv")
+text = "Temp Text"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0vbm6")
+}
+
+[node name="Icon" type="TextureRect" parent="."]
+offset_left = -67.0
+offset_top = -67.0
+offset_right = 67.0
+offset_bottom = 67.0
+expand_mode = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_oalk2")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

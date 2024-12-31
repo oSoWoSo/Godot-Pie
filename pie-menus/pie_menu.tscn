@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://fairq260s2h1"]
+
+[ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="1_33k4c"]
+[ext_resource type="Script" path="res://pie_menu.gd" id="1_xlgiw"]
+
+[node name="Pie Menu" type="Node2D"]
+script = ExtResource("1_xlgiw")
+
+[node name="Centre" type="Sprite2D" parent="."]
+position = Vector2(400, 400)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_33k4c")
+
+[node name="Items" type="Node2D" parent="."]
