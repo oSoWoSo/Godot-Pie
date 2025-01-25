@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bipgbc2yu3ps4"]
 
-[ext_resource type="Script" path="res://item.gd" id="1_sjry0"]
+[ext_resource type="Script" path="res://Items/item.gd" id="1_sjry0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_s6b2v"]
 
@@ -141,9 +141,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_oalk2"]
 radius = 105.067
 
-[node name="Item" type="Node2D"]
+[node name="Item" type="Node2D" node_paths=PackedStringArray("TEXT_BOX", "ICON", "SCANNER")]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_sjry0")
+TEXT_BOX = NodePath("Label")
+ICON = NodePath("Icon")
+SCANNER = NodePath("Area2D")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -174,10 +177,6 @@ offset_bottom = 67.0
 expand_mode = 1
 
 [node name="Area2D" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_oalk2")
-
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

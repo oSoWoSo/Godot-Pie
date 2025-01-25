@@ -1,0 +1,314 @@
+[gd_scene load_steps=15 format=3 uid="uid://7ctpfc1e1o2a"]
+
+[ext_resource type="Script" path="res://Items/sub_menu.gd" id="1_o3bu0"]
+[ext_resource type="FontFile" uid="uid://d4lyl643lc4o0" path="res://ASSETS/Exo-SemiBold.ttf" id="2_dlg63"]
+[ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="3_s5pdf"]
+[ext_resource type="BitMap" uid="uid://djexnaqvdp3tw" path="res://ASSETS/Items/modern - click mask.bmp" id="4_1ii6r"]
+
+[sub_resource type="Animation" id="Animation_448cy"]
+resource_name = "Intro"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Label Panel/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_qoq4r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Label Panel/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qfa8g"]
+resource_name = "click"
+length = 0.02
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.5, 1.5, 1.5, 1), Color(0.459268, 0.459268, 0.459268, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_xuad3"]
+resource_name = "focus"
+length = 0.03
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.5, 1.5, 1.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rws1p"]
+resource_name = "release"
+length = 0.02
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.459268, 0.459268, 0.459268, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kfeko"]
+resource_name = "unfocus"
+length = 0.03
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.5, 1.5, 1.5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hd2lo"]
+_data = {
+"Intro": SubResource("Animation_448cy"),
+"RESET": SubResource("Animation_qoq4r"),
+"click": SubResource("Animation_qfa8g"),
+"focus": SubResource("Animation_xuad3"),
+"release": SubResource("Animation_rws1p"),
+"unfocus": SubResource("Animation_kfeko")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yctwg"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 0.752941)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886954, 0.886954, 0.886954, 0.396078)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmcwt"]
+bg_color = Color(0, 0, 0, 0.117647)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Theme" id="Theme_ebb7i"]
+Label/font_sizes/font_size = 38
+Label/fonts/font = ExtResource("2_dlg63")
+
+[node name="SubMenu" type="Node2D" node_paths=PackedStringArray("TEXT_BOX", "ICON", "BUTTON", "ANIM", "LEFTPANE", "RIGHTPANE")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_o3bu0")
+TEXT_BOX = NodePath("Panel/Label Panel/Label")
+ICON = NodePath("Panel/Icon")
+BUTTON = NodePath("Panel/button")
+ANIM = NodePath("anim")
+LEFTPANE = NodePath("Panel/Left Pane/GridContainer")
+RIGHTPANE = NodePath("Panel/Right Pane/GridContainer")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hd2lo")
+}
+autoplay = "Intro"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -218.0
+offset_top = -86.0
+offset_right = 220.0
+offset_bottom = 86.0
+pivot_offset = Vector2(219, 86)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yctwg")
+
+[node name="Label Panel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 126.0
+offset_right = 388.0
+offset_bottom = 165.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmcwt")
+
+[node name="Label" type="Label" parent="Panel/Label Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -24.5
+offset_right = 159.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ebb7i")
+text = "A Sub Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Left Pane" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 10.0
+offset_right = 155.0
+offset_bottom = 118.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmcwt")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Left Pane"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 100.0
+columns = 2
+
+[node name="Right Pane" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 10.0
+offset_right = 387.0
+offset_bottom = 118.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmcwt")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Right Pane"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 100.0
+columns = 2
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 5.0
+offset_right = 276.0
+offset_bottom = 122.0
+texture = ExtResource("3_s5pdf")
+expand_mode = 1
+
+[node name="button" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = -18.25
+offset_top = -164.0
+offset_right = 467.75
+offset_bottom = 364.0
+texture_click_mask = ExtResource("4_1ii6r")
+ignore_texture_size = true
+stretch_mode = 0

@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://djexnaqvdp3tw"
+path="res://.godot/imported/modern - click mask.bmp-3836e887aeaecc8aa5082218ae9fc0fb.res"
+
+[deps]
+
+source_file="res://ASSETS/Items/modern - click mask.bmp"
+dest_files=["res://.godot/imported/modern - click mask.bmp-3836e887aeaecc8aa5082218ae9fc0fb.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cgrbyalynggmf"
-path="res://.godot/imported/simpletix.otf-9eee4556bdfdbb01af75b0aff5d52b34.fontdata"
+uid="uid://d4lyl643lc4o0"
+path="res://.godot/imported/Exo-SemiBold.ttf-797f14878196a2e28e6a7340658aa9a1.fontdata"
 
 [deps]
 
-source_file="res://simpletix.otf"
-dest_files=["res://.godot/imported/simpletix.otf-9eee4556bdfdbb01af75b0aff5d52b34.fontdata"]
+source_file="res://ASSETS/Exo-SemiBold.ttf"
+dest_files=["res://.godot/imported/Exo-SemiBold.ttf-797f14878196a2e28e6a7340658aa9a1.fontdata"]
 
 [params]
 

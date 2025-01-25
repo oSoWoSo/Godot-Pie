@@ -1,10 +1,12 @@
-extends Node2D
-
+extends Control
 
 var title : String 
 var icon_path : String
 var target_position : Vector2 = Vector2.ZERO
-var root = null
+
+
+signal change_speed_mode
+signal execute
 
 var animate_speed : float = 0.1
 var debug_mode : bool = false
@@ -13,52 +15,66 @@ var is_mouse_within : bool = false
 var is_button_pressed : bool = false
 
 var launch_command : String
-var command_flags = []
+
+@export var TEXT_BOX : Label
+@export var ICON : TextureRect
+@export var BUTTON : TextureButton
+@export var ANIM : AnimationPlayer
 
 func _ready():
-	$Label.text = title
+	TEXT_BOX.text = title
+	
 	if icon_path == "":
 		icon_path = "res://icon.svg"
-
+	
 	var img = Image.new()
 	var err = img.load(icon_path)
 	var texture = ImageTexture.new()
 	texture.set_image(img)
-	$Icon.texture = texture
+	ICON.texture = texture
+	
+	BUTTON.mouse_entered.connect(_mouse_entered)
+	BUTTON.mouse_exited.connect(_mouse_exited)
+	
 
 
 func _physics_process(delta):
 	position = lerp(position, target_position, animate_speed)
 
 
-func _on_area_2d_mouse_entered() -> void:
+func _mouse_entered() -> void:
 	is_mouse_within = true
-	$AnimationPlayer.play("hover")
+	#if ANIM.is_playing() and ANIM.current_animation == "intro":
+		#pass
+	#ANIM.play("focus")
+	ANIM.queue("focus")
+	change_speed_mode.emit()
 
-func _on_area_2d_mouse_exited() -> void:
+func _mouse_exited() -> void:
 	is_mouse_within = false
-	$AnimationPlayer.play("unhover")
+	ANIM.queue("unfocus")
+	change_speed_mode.emit()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and is_mouse_within:
-			$AnimationPlayer.play("pressed")
+			ANIM.queue("click")
 			is_button_pressed = true
 		if not event.pressed and is_button_pressed:
 			released()
 
 func released():
-	$AnimationPlayer.play("released")
+	ANIM.queue("release")
 	is_button_pressed = false
 	if launch_command == "":
 		print("Item Pressed has no command to execute")
 		return
 	
-	if debug_mode:
-		var output = []
-		OS.execute(launch_command, command_flags, output, true)
-		print("This is the output from the executed program: ")
-		print(output)
-	else:
-		OS.execute_with_pipe(launch_command, command_flags)
-		get_tree().quit(0)
+	execute.emit( "exe: " + launch_command + "%")
+	get_tree().quit(0)
+
+
+func _convert_to_click_mask():
+	var bitmap = BitMap.new()
+	bitmap.create_from_image_alpha(BUTTON.texture_normal.get_image())
+	BUTTON.texture_click_mask = bitmap
