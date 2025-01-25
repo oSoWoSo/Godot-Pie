@@ -23,3 +23,7 @@ A simple Pie Menu made in godot
   If you want to build from source simply clone the repo, open the project in godot 4.3 (any other 4.xx version will probably work as well) and then compile the project manually using the export tab in the godot editor
 
   Automatic launching on key press is not supported. Check your DE/WM documentation to launch the executable when a key is pressed.
+
+# Docs
+
+Im too lazy to write docs so just look at my reference config and figure it out (its really not that complicated you'll manage I promise :)
