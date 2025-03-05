@@ -5,6 +5,7 @@ const UDP_PORT = 42069
 var server := UDPServer.new()
 
 var ITEM = preload("res://Items/item_modern.tscn")
+#var ITEM = preload("res://Items/item_circle.tscn")
 var SUBMENU = preload("res://Items/sub_menu.tscn")
 @onready var ROOT = $icon/centre
 @onready var ROOT_ICON = $icon
@@ -200,6 +201,15 @@ func _physics_process(delta):
 		settings["global_rotation"] += 0.05
 		print("rotated " + str(root_rotation - settings["global_rotation"]) + "radians from initial rotation")
 		update_item_position()
+	
+	#$icon/pointer.look_at(get_global_mouse_position())
+	#$icon/pointer.rotation += PI/2
+	#var vec1 : Vector2 = -get_global_mouse_position() + $icon/pointer.global_position
+	#vec1 = vec1.normalized()
+	#var angle = sin(vec1.y)
+	var angle = $icon/pointer.get_angle_to(get_global_mouse_position())
+	$icon/pointer.rotation =  lerp($icon/pointer.rotation, $icon/pointer.rotation + angle + PI/2, 0.2)
+
 
 func _input(event):
 

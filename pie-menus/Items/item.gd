@@ -35,6 +35,7 @@ func _ready():
 	
 	BUTTON.mouse_entered.connect(_mouse_entered)
 	BUTTON.mouse_exited.connect(_mouse_exited)
+	ANIM.animation_finished.connect(_anim_finished)
 	
 
 
@@ -44,9 +45,6 @@ func _physics_process(delta):
 
 func _mouse_entered() -> void:
 	is_mouse_within = true
-	#if ANIM.is_playing() and ANIM.current_animation == "intro":
-		#pass
-	#ANIM.play("focus")
 	ANIM.queue("focus")
 	change_speed_mode.emit()
 
@@ -54,6 +52,11 @@ func _mouse_exited() -> void:
 	is_mouse_within = false
 	ANIM.queue("unfocus")
 	change_speed_mode.emit()
+	BUTTON.disabled = true
+	
+func _anim_finished(anim_name : StringName):
+	if anim_name == "unfocus":
+		BUTTON.disabled = false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

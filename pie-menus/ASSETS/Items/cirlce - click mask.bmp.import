@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://clew1cuwqvo23"
+path="res://.godot/imported/cirlce - click mask.bmp-575e9531c2242ce06494c7add31a64b3.res"
+
+[deps]
+
+source_file="res://ASSETS/Items/cirlce - click mask.bmp"
+dest_files=["res://.godot/imported/cirlce - click mask.bmp-575e9531c2242ce06494c7add31a64b3.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

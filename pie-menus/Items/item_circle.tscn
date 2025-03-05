@@ -1,17 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bipgbc2yu3ps4"]
+[gd_scene load_steps=14 format=3 uid="uid://bipgbc2yu3ps4"]
 
 [ext_resource type="Script" path="res://Items/item.gd" id="1_sjry0"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_s6b2v"]
-
-[sub_resource type="Theme" id="Theme_wofnv"]
-Label/colors/font_color = Color(0, 0, 0, 1)
-Label/colors/font_shadow_color = Color(0, 0, 0, 0.117647)
-Label/constants/line_spacing = 3
-Label/constants/shadow_offset_x = 2
-Label/constants/shadow_offset_y = 2
-Label/constants/shadow_outline_size = 2
-Label/font_sizes/font_size = 28
+[ext_resource type="BitMap" uid="uid://clew1cuwqvo23" path="res://ASSETS/Items/cirlce - click mask.bmp" id="2_r42l6"]
+[ext_resource type="FontFile" uid="uid://d4lyl643lc4o0" path="res://ASSETS/Exo-SemiBold.ttf" id="2_y3n5e"]
+[ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="3_buek2"]
 
 [sub_resource type="Animation" id="Animation_a122v"]
 length = 0.001
@@ -41,7 +33,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_d0vc6"]
-resource_name = "hover"
+resource_name = "focus"
 length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -65,11 +57,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.8, 0.8), Vector2(1, 1)]
+"values": [Vector2(0.8, 0.8), Vector2(0.9, 0.9)]
 }
 
 [sub_resource type="Animation" id="Animation_kyycl"]
-resource_name = "pressed"
+resource_name = "press"
 length = 0.05
 step = 0.01
 tracks/0/type = "value"
@@ -86,7 +78,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_s3u34"]
-resource_name = "released"
+resource_name = "release"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -102,7 +94,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_opq4g"]
-resource_name = "unhover"
+resource_name = "unfocus"
 length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -132,51 +124,89 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0vbm6"]
 _data = {
 "RESET": SubResource("Animation_a122v"),
-"hover": SubResource("Animation_d0vc6"),
-"pressed": SubResource("Animation_kyycl"),
-"released": SubResource("Animation_s3u34"),
-"unhover": SubResource("Animation_opq4g")
+"focus": SubResource("Animation_d0vc6"),
+"press": SubResource("Animation_kyycl"),
+"release": SubResource("Animation_s3u34"),
+"unfocus": SubResource("Animation_opq4g")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oalk2"]
-radius = 105.067
+[sub_resource type="SphereMesh" id="SphereMesh_s6b2v"]
 
-[node name="Item" type="Node2D" node_paths=PackedStringArray("TEXT_BOX", "ICON", "SCANNER")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsi52"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 0.752941)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886954, 0.886954, 0.886954, 0.396078)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+corner_detail = 12
+
+[sub_resource type="Theme" id="Theme_ushah"]
+Label/font_sizes/font_size = 38
+Label/fonts/font = ExtResource("2_y3n5e")
+
+[node name="Item" type="Control" node_paths=PackedStringArray("TEXT_BOX", "ICON", "BUTTON", "ANIM")]
+layout_mode = 3
+anchors_preset = 0
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_sjry0")
 TEXT_BOX = NodePath("Label")
-ICON = NodePath("Icon")
-SCANNER = NodePath("Area2D")
+ICON = NodePath("Panel/Icon")
+BUTTON = NodePath("Panel/button")
+ANIM = NodePath("anim")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(0, 11)
-scale = Vector2(198.225, 198.225)
-mesh = SubResource("SphereMesh_s6b2v")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -98.0
-offset_top = 95.0
-offset_right = 98.0
-offset_bottom = 176.0
-theme = SubResource("Theme_wofnv")
-text = "Temp Text"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_0vbm6")
 }
 
-[node name="Icon" type="TextureRect" parent="."]
-offset_left = -67.0
-offset_top = -67.0
-offset_right = 67.0
-offset_bottom = 67.0
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1, 0)
+scale = Vector2(198.225, 198.225)
+mesh = SubResource("SphereMesh_s6b2v")
+
+[node name="Panel" type="Panel" parent="."]
+clip_children = 2
+layout_mode = 0
+offset_left = -90.0
+offset_top = -86.0
+offset_right = 93.0
+offset_bottom = 86.0
+pivot_offset = Vector2(219, 86)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsi52")
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 157.0
+offset_bottom = 153.0
+texture = ExtResource("3_buek2")
 expand_mode = 1
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="button" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 1.25
+offset_top = -2.75
+offset_right = 181.25
+offset_bottom = 177.25
+texture_click_mask = ExtResource("2_r42l6")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_oalk2")
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -98.0
+offset_top = 83.75
+offset_right = 98.0
+offset_bottom = 164.75
+theme = SubResource("Theme_ushah")
+text = "Temp Text"
+horizontal_alignment = 1
+autowrap_mode = 2

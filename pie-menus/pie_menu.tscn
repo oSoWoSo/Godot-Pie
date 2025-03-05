@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://fairq260s2h1"]
+[gd_scene load_steps=8 format=3 uid="uid://fairq260s2h1"]
 
 [ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="1_33k4c"]
 [ext_resource type="Script" path="res://pie_menu.gd" id="1_xlgiw"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ydstt"]
 
 [sub_resource type="Animation" id="Animation_1yxsw"]
 length = 0.001
@@ -77,6 +79,17 @@ grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_33k4c")
 expand_mode = 1
+
+[node name="pointer" type="Marker2D" parent="icon"]
+show_behind_parent = true
+position = Vector2(64, 64)
+gizmo_extents = 57.0
+
+[node name="pointer_mesh" type="MeshInstance2D" parent="icon/pointer"]
+position = Vector2(0.721588, -87.75)
+rotation = 3.14159
+scale = Vector2(34.4432, 37.5)
+mesh = SubResource("PrismMesh_ydstt")
 
 [node name="centre_button" type="Button" parent="icon"]
 self_modulate = Color(1, 1, 1, 0)
