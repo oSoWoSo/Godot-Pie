@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://7ctpfc1e1o2a"]
 
-[ext_resource type="Script" path="res://Items/sub_menu.gd" id="1_o3bu0"]
+[ext_resource type="Script" uid="uid://bprcp25jfu5ft" path="res://Items/sub_menu.gd" id="1_o3bu0"]
 [ext_resource type="FontFile" uid="uid://d4lyl643lc4o0" path="res://ASSETS/Exo-SemiBold.ttf" id="2_dlg63"]
 [ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="3_s5pdf"]
 [ext_resource type="BitMap" uid="uid://djexnaqvdp3tw" path="res://ASSETS/Items/modern - click mask.bmp" id="4_1ii6r"]
@@ -178,12 +178,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hd2lo"]
 _data = {
-"Intro": SubResource("Animation_448cy"),
-"RESET": SubResource("Animation_qoq4r"),
-"click": SubResource("Animation_qfa8g"),
-"focus": SubResource("Animation_xuad3"),
-"release": SubResource("Animation_rws1p"),
-"unfocus": SubResource("Animation_kfeko")
+&"Intro": SubResource("Animation_448cy"),
+&"RESET": SubResource("Animation_qoq4r"),
+&"click": SubResource("Animation_qfa8g"),
+&"focus": SubResource("Animation_xuad3"),
+&"release": SubResource("Animation_rws1p"),
+&"unfocus": SubResource("Animation_kfeko")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yctwg"]
@@ -222,7 +222,7 @@ RIGHTPANE = NodePath("Panel/Right Pane/GridContainer")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hd2lo")
+&"": SubResource("AnimationLibrary_hd2lo")
 }
 autoplay = "Intro"
 
@@ -250,9 +250,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -153.0
+offset_left = -163.0
 offset_top = -24.5
-offset_right = 159.0
+offset_right = 165.0
 offset_bottom = 27.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -260,7 +260,8 @@ theme = SubResource("Theme_ebb7i")
 text = "A Sub Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="Left Pane" type="Panel" parent="Panel"]
 layout_mode = 0

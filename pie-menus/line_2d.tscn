@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://4favb5gurgim"]
+
+[ext_resource type="Curve" uid="uid://b2kaiefrkoww1" path="res://ASSETS/line_width_curve.tres" id="1_2jggx"]
+[ext_resource type="Gradient" uid="uid://d38p6oxwhcgbc" path="res://ASSETS/line_gradient.tres" id="2_kkek2"]
+
+[node name="Line2D" type="Line2D"]
+width_curve = ExtResource("1_2jggx")
+gradient = ExtResource("2_kkek2")
+antialiased = true

@@ -1,5 +1,4 @@
-res://Items/item_circle.tscn
 res://pie_menu.tscn
-res://Items/item_modern.tscn
 res://pie_menu.gd
-res://Items/item.gd
+res://Items/sub_menu.tscn
+res://Items/item_modern.tscn

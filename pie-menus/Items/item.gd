@@ -21,8 +21,12 @@ var launch_command : String
 @export var BUTTON : TextureButton
 @export var ANIM : AnimationPlayer
 
+var ERROR_LABEL : Label
+
 func _ready():
 	TEXT_BOX.text = title
+	if TEXT_BOX.text.length() > 14:
+		TEXT_BOX.set("theme_override_font_sizes/font_size", 30)
 	
 	if icon_path == "":
 		icon_path = "res://icon.svg"
@@ -35,6 +39,8 @@ func _ready():
 	
 	BUTTON.mouse_entered.connect(_mouse_entered)
 	BUTTON.mouse_exited.connect(_mouse_exited)
+	BUTTON.button_down.connect(_button_down)
+	BUTTON.button_up.connect(_button_up)
 	ANIM.animation_finished.connect(_anim_finished)
 	
 
@@ -58,22 +64,21 @@ func _anim_finished(anim_name : StringName):
 	if anim_name == "unfocus":
 		BUTTON.disabled = false
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed and is_mouse_within:
-			ANIM.queue("click")
-			is_button_pressed = true
-		if not event.pressed and is_button_pressed:
-			released()
+func _button_down():
+	ANIM.queue("click")
+func _button_up():
+	released()
+	
 
 func released():
 	ANIM.queue("release")
 	is_button_pressed = false
 	if launch_command == "":
-		print("Item Pressed has no command to execute")
+		ERROR_LABEL.text = "No Launch Command was provided for Item '" + name + "'"
+		printerr("Item Pressed has no command to execute")
 		return
 	
-	execute.emit( "exe: " + launch_command + "%")
+	execute.emit(launch_command)
 	get_tree().quit(0)
 
 

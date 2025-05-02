@@ -9,6 +9,7 @@ var items = []
 var total_items : int = 4
 
 var animate_speed : float = 0.1
+var item_rotation : float = 0.0
 
 
 enum STATES {ACTIVE, IDLE}
@@ -31,6 +32,8 @@ var TEXTURE_RECT = preload("res://texture_rect.tscn")
 
 func _ready():
 	TEXT_BOX.text = title
+	if TEXT_BOX.text.length() > 14:
+		TEXT_BOX.set("theme_override_font_sizes/font_size", 30)
 	
 	if icon_path == "":
 		icon_path = "res://icon.svg"
@@ -43,6 +46,8 @@ func _ready():
 	
 	BUTTON.mouse_entered.connect(_mouse_entered)
 	BUTTON.mouse_exited.connect(_mouse_exited)
+	BUTTON.button_down.connect(_button_down)
+	BUTTON.button_up.connect(_button_up)
 	
 	spawn_side_pane_icons()
 
@@ -77,14 +82,18 @@ func _mouse_exited() -> void:
 	change_speed_mode.emit()
 
 
+func _button_down():
+	ANIM.queue("click")
+func _button_up():
+	released()
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed and is_mouse_within:
-			ANIM.queue("click")
-			is_button_pressed = true
-		if not event.pressed and is_button_pressed:
-			released()
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton:
+		#if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and is_mouse_within:
+			#ANIM.queue("click")
+			#is_button_pressed = true
+		#if not event.pressed and is_button_pressed:
+			#released()
 
 func released():
 	ANIM.queue("release")

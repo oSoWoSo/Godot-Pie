@@ -1,16 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://fairq260s2h1"]
+[gd_scene load_steps=10 format=3 uid="uid://fairq260s2h1"]
 
 [ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="1_33k4c"]
-[ext_resource type="Script" path="res://pie_menu.gd" id="1_xlgiw"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_ydstt"]
+[ext_resource type="Script" uid="uid://dnv1ajvbirl0n" path="res://pie_menu.gd" id="1_xlgiw"]
+[ext_resource type="Texture2D" uid="uid://bgj5dlxxivxom" path="res://ASSETS/Items/cirlce - reference.png" id="2_6eo3y"]
+[ext_resource type="Texture2D" uid="uid://ctfa80u3ow242" path="res://ASSETS/pointer.png" id="3_ofynd"]
 
 [sub_resource type="Animation" id="Animation_1yxsw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("icon:self_modulate")
+tracks/0/path = NodePath("centre/clipping mask/icon:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +27,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("icon:self_modulate")
+tracks/0/path = NodePath("centre/clipping mask/icon:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -44,7 +44,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("icon:self_modulate")
+tracks/0/path = NodePath("centre/clipping mask/icon:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,42 +56,62 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4x55n"]
 _data = {
-"RESET": SubResource("Animation_1yxsw"),
-"hover": SubResource("Animation_s7tnw"),
-"unhover": SubResource("Animation_a3cnt")
+&"RESET": SubResource("Animation_1yxsw"),
+&"hover": SubResource("Animation_s7tnw"),
+&"unhover": SubResource("Animation_a3cnt")
 }
+
+[sub_resource type="PrismMesh" id="PrismMesh_ydstt"]
 
 [node name="Pie Menu" type="Node2D"]
 script = ExtResource("1_xlgiw")
 
-[node name="icon" type="TextureRect" parent="."]
+[node name="centre" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 400.0
+offset_top = 400.0
+offset_right = 400.0
+offset_bottom = 400.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="clipping mask" type="TextureRect" parent="centre"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 350.0
-offset_top = 350.0
-offset_right = 478.0
-offset_bottom = 478.0
+offset_left = -53.0
+offset_top = -53.0
+offset_right = 53.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6eo3y")
+expand_mode = 1
+
+[node name="icon" type="TextureRect" parent="centre/clipping mask"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -50.5
+offset_right = 77.5
+offset_bottom = 77.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_33k4c")
 expand_mode = 1
 
-[node name="pointer" type="Marker2D" parent="icon"]
-show_behind_parent = true
-position = Vector2(64, 64)
-gizmo_extents = 57.0
-
-[node name="pointer_mesh" type="MeshInstance2D" parent="icon/pointer"]
-position = Vector2(0.721588, -87.75)
-rotation = 3.14159
-scale = Vector2(34.4432, 37.5)
-mesh = SubResource("PrismMesh_ydstt")
-
-[node name="centre_button" type="Button" parent="icon"]
+[node name="centre_button" type="Button" parent="centre/clipping mask/icon"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -101,20 +121,46 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(64, 64)
 
-[node name="centre" type="Marker2D" parent="icon"]
-position = Vector2(64, 64)
-gizmo_extents = 57.0
-
-[node name="anim" type="AnimationPlayer" parent="icon"]
-root_node = NodePath("../..")
+[node name="anim" type="AnimationPlayer" parent="centre/clipping mask/icon"]
+root_node = NodePath("../../../..")
 libraries = {
-"": SubResource("AnimationLibrary_4x55n")
+&"": SubResource("AnimationLibrary_4x55n")
 }
 
-[node name="spawner" type="Timer" parent="."]
-wait_time = 0.05
+[node name="pointer" type="Marker2D" parent="centre"]
+show_behind_parent = true
+scale = Vector2(0.8, 0.8)
+gizmo_extents = 57.0
 
-[connection signal="mouse_entered" from="icon/centre_button" to="." method="_on_centre_button_mouse_entered"]
-[connection signal="mouse_exited" from="icon/centre_button" to="." method="_on_centre_button_mouse_exited"]
-[connection signal="pressed" from="icon/centre_button" to="." method="_on_centre_button_pressed"]
-[connection signal="timeout" from="spawner" to="." method="_on_item_spawner_timeout"]
+[node name="pointer_mesh" type="MeshInstance2D" parent="centre/pointer"]
+visible = false
+position = Vector2(0.721588, -87.75)
+rotation = 3.14159
+scale = Vector2(34.4432, 37.5)
+mesh = SubResource("PrismMesh_ydstt")
+
+[node name="Sprite2D" type="Sprite2D" parent="centre/pointer"]
+modulate = Color(1, 1, 1, 0.380392)
+position = Vector2(0, -10.5625)
+scale = Vector2(0.588868, 0.588868)
+texture = ExtResource("3_ofynd")
+
+[node name="Lines" type="Node2D" parent="centre"]
+
+[node name="ErrorLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 743.0
+offset_right = 801.0
+offset_bottom = 797.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.961629, 0.177254, 0.177254, 1)
+theme_override_font_sizes/font_size = 14
+vertical_alignment = 2
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="centre/clipping mask/icon/centre_button" to="." method="_on_centre_button_mouse_entered"]
+[connection signal="mouse_exited" from="centre/clipping mask/icon/centre_button" to="." method="_on_centre_button_mouse_exited"]
+[connection signal="pressed" from="centre/clipping mask/icon/centre_button" to="." method="_on_centre_button_pressed"]

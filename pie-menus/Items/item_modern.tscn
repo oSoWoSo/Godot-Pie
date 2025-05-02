@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bruy75lxvd5w6"]
 
-[ext_resource type="Script" path="res://Items/item.gd" id="1_xltuv"]
+[ext_resource type="Script" uid="uid://bv72w50725k8v" path="res://Items/item.gd" id="1_xltuv"]
 [ext_resource type="Texture2D" uid="uid://bx5cdubgvxtfq" path="res://icon.svg" id="2_bulng"]
 [ext_resource type="BitMap" uid="uid://djexnaqvdp3tw" path="res://ASSETS/Items/modern - click mask.bmp" id="3_qobeq"]
 [ext_resource type="FontFile" uid="uid://d4lyl643lc4o0" path="res://ASSETS/Exo-SemiBold.ttf" id="3_ra35x"]
@@ -178,12 +178,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_or3a3"]
 _data = {
-"RESET": SubResource("Animation_qywwj"),
-"click": SubResource("Animation_nh33c"),
-"focus": SubResource("Animation_706qy"),
-"intro": SubResource("Animation_yjbsa"),
-"release": SubResource("Animation_tmpaw"),
-"unfocus": SubResource("Animation_21agy")
+&"RESET": SubResource("Animation_qywwj"),
+&"click": SubResource("Animation_nh33c"),
+&"focus": SubResource("Animation_706qy"),
+&"intro": SubResource("Animation_yjbsa"),
+&"release": SubResource("Animation_tmpaw"),
+&"unfocus": SubResource("Animation_21agy")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2lxn"]
@@ -222,7 +222,7 @@ ANIM = NodePath("anim")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_or3a3")
+&"": SubResource("AnimationLibrary_or3a3")
 }
 autoplay = "intro"
 
@@ -252,16 +252,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -92.0
-offset_top = -40.0
+offset_top = -66.0
 offset_right = 98.0
-offset_bottom = 46.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_rurq0")
 text = "Some test text yay"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="Icon" type="TextureRect" parent="Panel"]
 layout_mode = 0
