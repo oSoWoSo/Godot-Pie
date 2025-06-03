@@ -1,0 +1,46 @@
+name: release
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Cache dependencies"
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: godot
+          version: 1.0
+
+      - name: prepare release
+        run: |
+          godot --verbose --headless --path pie-menus --export-release Linux release/GodotPie-${{ github.run_number }}
+
+      - name: push changes (if any)
+        shell: bash
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          git config --global user.name "web-flow"
+          git config --global user.email "noreply@github.com"
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            git add .
+            git commit -m "🦉"
+            git push
+          else
+            echo "no changes"
+            exit 0
+          fi
+
+      - name: Release
+        uses: remarkablemark/gitploy-action@v1
+        with:
+          directory: release
